@@ -1,0 +1,40 @@
+table, td, th {
+    border: 1px solid black;
+	margin: auto;
+	text-align:center;
+	border-collapse: collapse;
+}
+tr {
+	font-size: 20;
+}
+td {
+	font-size: 18;
+}
+th {
+    background-color: white;
+    color: black;
+}
+h1, h3{
+	text-align: center;
+	color: blue;
+	font-family:Georgia, Times New Roman, Times, serif;
+}
+.adsense { 
+text-align: center; 
+  position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.ads   {
+	padding-top:20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+.center {
+    text-align:center;
+    width:100%;
+}
+.left {
+	float: left;
+}

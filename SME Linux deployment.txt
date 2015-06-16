@@ -1,0 +1,50 @@
+Please follow these instructions carefully for best results. Please note this application has been tested on MITEL 3300 PBXes ONLY!
+
+Extract the files into a folder that is writeable to the user that you will be running the application as. I have tested this on SME Linux in the root directory. If you have multiple PBXes that you wish to monitor then you will need to create a folder for each and extract the check.pl and config.ini files into them.
+
+Edit the config.ini file and enter the information for each field following the example below:
+
+pbx = ""			This is the IP address of the PBX to be monitored
+company = ""		Please enter a company name. This is used to group your PBXes on the website
+alertemail = ""		The address that alerts will be sent to
+community = ""		Important to allow access to the SNMP info on the PBX. Check the PBX for this info, public is the default.
+port = "161"		Should not need to change
+fromemail = ""		Email address that the alert email will be from
+emailhost = ""		Your SMTP mail host address (required for email alerts)
+smtpaddress = "" 	SMTP mail host user login (user@mailhost.com)
+smtppass = ""		Password for authenticated SMTP host
+
+There are some perl modules that will need to be loaded so the first step is to add the DAG repository following the http://wiki.contribs.org/Dag instructions.
+Once that is completed then install the below modules:
+
+yum --enablerepo=dag install perl-Net-SNMP
+yum --enablerepo=dag install perl-Email-Send
+yum --enablerepo=dag install perl-Config-Simple
+
+If any other modules are missing from your installation you will get an error when you run the script for the first time so just install the missing module.
+
+Make the script executable with the command "chmod +x check.pl"
+
+Upload the monitoring database structure to your mysql server with the below (assuming you have no password for root):
+
+mysql -u root < monitoring.sql
+
+Upload the simplealarm directory to the default location "/home/e-smith/files/ibays/Primary/html" to create the simplealarm website. You can test that it is deployed correctly by going to the http://sme-server-ip/simplealarm/index.html
+
+Click on the "Register" link and create a new user. Please ensure that the Company entry is IDENTICAL to the company entry in the config.ini file or you will not see your alarms!
+
+Test the setup by running the check.pl script. If you have already made it executable then simply entering ./check.pl will work. If not use perl check.pl instead. The first time it is run you will get some errors that relate to file creation, they can be ignored. If everything goes to plan you should find a new file named with the ip address of the PBX in the directory.
+The command should produce a response similar to the below:
+
+Connecting to the Company PBX 192.168.99.200 with SNMP community public on port 161
+State OK - No Alarms on vMCD
+
+Login to the website and view the status of your PBX now.
+
+If all goes well then add the script to your cron jobs to run every 5 mins or so with the below entry:
+
+*/5 * * * * /root/check.pl
+
+Let me know if you have any issues with this.
+
+Enjoy!
