@@ -31,5 +31,5 @@ CREATE TABLE IF NOT EXISTS `tokens` (
   `used` int(1) NOT NULL default '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE USER 'monitor'@'localhost' IDENTIFIED BY 'Adm1n!';
+CREATE USER 'monitor'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'monitor'@'localhost';
