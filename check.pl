@@ -47,7 +47,7 @@ if ($r_sysName eq "") {$r_sysName = $last_line;}
 # Open database to check and add new entry with alarm details if state changed
 # MySQL Connection parameters
 my $dbuser= "monitor";
-my $dbpassword= "Adm1n!";
+my $dbpassword= "password";
 my $dbhost= "localhost";
 my $currentDate ='';
 my $currentAlarm = '';
